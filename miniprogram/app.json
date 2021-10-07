@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/plaza/index",
+    "pages/active/index",
+    "pages/student/index",
+    "pages/achievement/index"
+    
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#10ABF7",
+    "navigationBarTitleText": "猿人滑雪",
+    "navigationBarTextStyle": "black"
+    
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "useExtendedLib": {
+    "weui":true
+  },
+  "plugins": {
+    "routePlan":{
+      "version": "1.0.12",
+      "provider": "wx50b5593e81dd937a"
+    }
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置将用于小程序定位"
+    }
+  }
+
+}

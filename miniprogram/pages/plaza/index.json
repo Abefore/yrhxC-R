@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "active": "/pages/active/index",
+    "student": "/pages/student/index",
+    "achievement": "/pages/achievement/index"
+  }
+
+}

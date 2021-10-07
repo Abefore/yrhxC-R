@@ -1,0 +1,85 @@
+<scroll-view scroll-x="true">
+  <view wx:for="{{bindStudents}}" wx:key="index" class="studentTemplate ">
+    <view class="bg-cyan padding-xs margin-xs radius-xl text-center light margin-top-sm">
+      <!-- <view class="margin-top-sm text-Abc">background</view> -->
+      <view class="cu-avatar xxl round margin-left" style="background-image:url({{item.pic}});"></view>
+      <view class="text-lg">{{item.name}}</view>
+      <!-- <view class="solid-bottom text-xl padding">
+        <text class="text-black text-bold">已训练学时:{{item.complete}}H</text>
+      </view> -->
+
+      <view class="solid-bottom text-xl padding" wx:if="{{item.honor.length > 0}}">
+        <text class="text-black text-bold">荣誉</text>
+        <view class="padding-0  text-yellow" wx:for="{{item.honor}}" wx:key="index">{{item}}</view>
+      </view>
+
+      <view class="solid-bottom text-xl padding">
+        <text class="text-black text-bold">已解锁成就</text>
+        <view class="cu-list grid col-4" wx:if="{{item.achievement.length > 0}}">
+          <view class="cu-item" wx:for="{{item.achievement}}" wx:key="index" >
+            <view class="cuIcon lg text-gray">
+              <image src="/images/achi-1.png" style="height:64rpx;width:64rpx"></image>
+            </view>
+            
+            <!-- <text class="cuIcon-{{item.name}} lg text-gray"></text> -->
+            <!-- <text>{{item.name}}</text> -->
+          </view>
+        </view>
+        <view wx:else>尚未解锁成就</view>
+      </view>
+    </view>
+    
+  </view>
+
+
+
+  <view bindtap="showModal" wx:if="hasBind" data-target="Modal" class="btn-addstudent  text-center">
+    <image  src="/images/addStudent.png" mode="center" class="img-center" ></image>
+  </view>
+  
+  <view style="height:200rpx"></view>
+</scroll-view>
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">搜索</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="box">
+        <!-- 搜索栏 start -->
+        <view class="cu-bar search bg-white">
+          <view class="search-form round">
+            <text class="cuIcon-search"></text>
+            <input type="number" placeholder="搜索联系电话" confirm-type="search" bindinput="saveInputInfo"></input>
+          </view>
+          <view class="action">
+            <button bindtap="searchStudentsByPhoneNumber" class="cu-btn bg-blue shadow-blur round"  style="width:30%">搜索</button>
+          </view>
+        </view>
+        <!-- 搜索栏 end -->
+        <!-- 搜索结果 start -->
+        <form bindsubmit="bindStudents">
+          <checkbox-group  name ="selectStudent" >
+            <view class="solid-bottom text-sm padding">
+              <text class="text-grey">{{searchTips}}</text>
+            </view>
+           <view class="cu-form-group" wx:for="{{searchResp}}" wx:key = "index">
+            <view class="cu-avatar xs round margin-left" style="background-image:url({{item.pic}});"></view>
+            <view class="title margin-left">{{item.name}}</view>
+            <checkbox wx:if="{{duplicateResp[index]}}" value="{{index}}"></checkbox>
+            <view wx:else>
+              <text>已绑定</text>
+            </view>
+           </view>
+          </checkbox-group>
+          <view class="cu-bar btn-group">
+            <button class="cu-btn bg-blue shadow-blur round lg"  form-type="submit">绑定</button>
+          </view>
+        </form>
+        <!-- 搜索结果 end -->
+        
+      </view>
+    </view>
+  </view>

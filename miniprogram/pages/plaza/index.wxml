@@ -1,0 +1,42 @@
+<!--pages/plaza/index.wxml-->
+<!-- <text>pages/plaza/index.wxml</text> -->
+<!-- <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText"> 返回</view>
+  <view slot="content"> 猿人滑雪</view>
+</cu-custom> -->
+<active wx:if="{{PageCur=='active'}}"></active>
+<student wx:if="{{PageCur=='student'}}"></student>
+<achievement wx:if="{{PageCur=='achievement'}}"></achievement>
+
+
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="active">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/component{{PageCur=='active'?'_cur':''}}.png"></image>
+      
+    </view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">首页</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="student">
+    <view class='cuIcon-cu-image'>
+      
+      <image src="/images/tabbar/about{{PageCur=='student'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='component'?'text-green':'text-gray'}}">个人</view>
+  </view>
+  <!-- <view class="action" bindtap="NavChange" data-cur="plugin">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/plugin{{PageCur=='plugin'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='plugin'?'text-green':'text-gray'}}">扩展</view>
+  </view> -->
+  <view class="action" bindtap="NavChange" data-cur="achievement">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/basics{{PageCur=='achievement'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='about'?'text-green':'text-gray'}}">成就</view>
+  </view>
+</view>
+
+
+

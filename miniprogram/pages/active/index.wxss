@@ -1,0 +1,4 @@
+/* pages/active/index.wxss */
+.scrollPage{
+  margin-bottom: 100rpx;
+}

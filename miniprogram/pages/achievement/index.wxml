@@ -1,0 +1,26 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">图标</view></cu-custom>
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="搜索icon" confirm-type="search" bindinput="searchIcon"></input>
+  </view>
+</view>
+<view class="cu-list grid col-3">
+  <view class="cu-item" wx:for="{{icon}}" wx:key wx:if="{{item.isShow}}" bindtap="showModal" data-target="Modal">
+    <text class="cuIcon-{{item.name}} lg text-gray"></text>
+    <text>{{item.name}}</text>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">xx成就</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      完成xxx动作xxx次。
+    </view>
+  </view>
+</view>

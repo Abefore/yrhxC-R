@@ -1,0 +1,13 @@
+<!--pages/login/index.wxml-->
+
+<view class="full bg-black"  >
+  <block wx:if="{{showBtn}}" >
+    <image class=" xl round mergin-top" src = "{{loginPic}}"></image>
+    <button class="cu-btn lines-blue round lg" bindtap="getUserInfo"  >授权</button>
+  </block>
+  <block wx:else>
+    <text>请授权手机号登录</text>
+    <button class="cu-btn lines-blue round lg" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"  >登录</button>
+  </block>
+ 
+</view>
