@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/student/index",
     "pages/login/index",
     "pages/plaza/index",
     "pages/active/index",
-    "pages/student/index",
     "pages/achievement/index"
     
   ],

@@ -1,12 +1,42 @@
-<scroll-view scroll-x="true">
+<scroll-view scroll-y class="scrollPage ">
+  <view class="center-h" style="height:200rpx;width:100%;">
+    <view class="cu-avatar round  xl margin-top" style="background-image:url({{avatar}}); ">
+      <view class="cu-tag badge {{sex%2==0?'cuIcon-female bg-pink' : 'cuIcon-male bg-blue'}}"></view>
+    </view>
+  </view>
+    <view class="flex-sub text-center">
+      <view class="solid-bottom text-xl ">
+        <text class= 'text-black text-bold'>图多多</text>
+      </view>
+    </view>
+    <view class="flex-sub text-center">
+      <view class="solid-bottom text-lg ">
+        <text class= 'text-black '>尚未开始训练</text>
+      </view>
+    </view>
+    <view class="text-center" style="margin-top:40rpx;">查看课程</view>
+    <scroll-view scroll-y style="height:600rpx;margin-top:100rpx;">
+      <view class="cu-timeline">
+        <view class="cu-time ">初识滑雪</view>
+        <view class="cu-item " wx:for="{1,2,3,4,5}">
+          <view class="content bg-green shadow-blur"> <text>2021.10.16</text> 了解装备</view>
+        </view>
+      </view>
+    </scroll-view>
+
+
+</scroll-view>
+
+
+
+
+<!-- <scroll-view scroll-x="true">
   <view wx:for="{{bindStudents}}" wx:key="index" class="studentTemplate ">
     <view class="bg-cyan padding-xs margin-xs radius-xl text-center light margin-top-sm">
-      <!-- <view class="margin-top-sm text-Abc">background</view> -->
+
       <view class="cu-avatar xxl round margin-left" style="background-image:url({{item.pic}});"></view>
       <view class="text-lg">{{item.name}}</view>
-      <!-- <view class="solid-bottom text-xl padding">
-        <text class="text-black text-bold">已训练学时:{{item.complete}}H</text>
-      </view> -->
+ 
 
       <view class="solid-bottom text-xl padding" wx:if="{{item.honor.length > 0}}">
         <text class="text-black text-bold">荣誉</text>
@@ -21,8 +51,7 @@
               <image src="/images/achi-1.png" style="height:64rpx;width:64rpx"></image>
             </view>
             
-            <!-- <text class="cuIcon-{{item.name}} lg text-gray"></text> -->
-            <!-- <text>{{item.name}}</text> -->
+          
           </view>
         </view>
         <view wx:else>尚未解锁成就</view>
@@ -48,7 +77,7 @@
         </view>
       </view>
       <view class="box">
-        <!-- 搜索栏 start -->
+  
         <view class="cu-bar search bg-white">
           <view class="search-form round">
             <text class="cuIcon-search"></text>
@@ -58,8 +87,7 @@
             <button bindtap="searchStudentsByPhoneNumber" class="cu-btn bg-blue shadow-blur round"  style="width:30%">搜索</button>
           </view>
         </view>
-        <!-- 搜索栏 end -->
-        <!-- 搜索结果 start -->
+       
         <form bindsubmit="bindStudents">
           <checkbox-group  name ="selectStudent" >
             <view class="solid-bottom text-sm padding">
@@ -78,8 +106,8 @@
             <button class="cu-btn bg-blue shadow-blur round lg"  form-type="submit">绑定</button>
           </view>
         </form>
-        <!-- 搜索结果 end -->
+
         
       </view>
     </view>
-  </view>
+  </view> -->

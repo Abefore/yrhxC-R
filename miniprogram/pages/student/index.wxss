@@ -37,3 +37,9 @@ item.none{
 .box view.cu-bar {
   margin-top: 20rpx; 
 }
+
+.center-h{
+  display: flex;
+  justify-content: center;
+  
+}

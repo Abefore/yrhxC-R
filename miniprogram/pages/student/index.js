@@ -7,6 +7,8 @@ Component({
     searchTips:'请根据联系电话查找',
     // modalName:null
     bindStudents:[],
+    avatar:'/images/loginLogo.png',
+    sex : 1,
   //   [
   //     {
   //     name:"咖喱",
