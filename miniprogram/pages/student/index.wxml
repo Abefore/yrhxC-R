@@ -11,7 +11,7 @@
     </view>
     <view class="flex-sub text-center">
       <view class="solid-bottom text-lg ">
-        <text class= 'text-black '>尚未开始训练</text>
+        <text class= 'text-black '>已学习4天</text>
       </view>
     </view>
     <view class="text-center" style="margin-top:40rpx;">查看课程</view>
@@ -81,7 +81,7 @@
         <view class="cu-bar search bg-white">
           <view class="search-form round">
             <text class="cuIcon-search"></text>
-            <input type="number" placeholder="搜索联系电话" confirm-type="search" bindinput="saveInputInfo"></input>
+            <input type="number" placeholder="搜索联系电话" confirm-type="search" bindinput="saveInputInfo"></input> 
           </view>
           <view class="action">
             <button bindtap="searchStudentsByPhoneNumber" class="cu-btn bg-blue shadow-blur round"  style="width:30%">搜索</button>

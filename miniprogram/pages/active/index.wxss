@@ -2,3 +2,33 @@
 .scrollPage{
   margin-bottom: 100rpx;
 }
+.first-bg{
+  width: 100%;
+}
+.page-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.image {
+  /* width: 746rpx; */
+}
+
+.image-parent {
+  /* height: 746rpx;  */
+  position: relative;
+  /* border: 2rpx solid red; */
+}
+
+.child {
+  /* width: 100px;
+  height: 24px;   */
+  position: absolute;
+  left: 0;
+  top: 6rpx;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+  /* background: yellowgreen; */
+}  
