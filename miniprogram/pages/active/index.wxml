@@ -1,31 +1,30 @@
 <!--pages/active/index.wxml-->
-<view class="scrollPage ">
+<view class = "page-center" style="background-color:#7FCBE6;">
+  <view class="first-bg">
+    <image  src="/images/first/bg_small.png" style="width:100%;" mode="widthFix"></image>
+  </view>
+  <view class="image-parent">
+   <image class="image" src="/images/first/title-bg.png" mode="widthFix"></image>
+    <text class="child" style="color:#ffffff;font-size:46rpx;">预约报名</text>
+  </view>
+  <view class="signInView image-parent page-center" style="width: 640rpx; ">
+    <view class="image page-center" style="width:609rpx;background-color:#ffffff;border:10rpx solid #189bd8; border-radius:30rpx;">
+      <view class="signItem" wx:for="{{classList}}" wx:key="index" style="width:609rpx;height:225rpx; display: flex;flex-wrap:wrap;align-items:center">
+        <image class="page-center" src="/images/first/blue-bg.png"
+          style="width: 200rpx;  margin-left:30rpx;margin-right:30rpx" mode="widthFix">
+          <text class="child" style="color:#ffffff;">10.26-10.27</text>
+        </image>
+        <image src="/images/first/dot.png" style="width: 200rpx; "
+          mode="widthFix"></image>
+      
+        <text style="width: 200rpx; margin-left: 60rpx; font-size: 30rpx;font-weight：bold">{{item.name}}</text>
+        <button style="display: flex;flex-wrap:wrap;align-items:center;justify-content:center"><image src="/images/first/yellow-bg.png" mode="widthFix">12312312  </image>
+         
+        </button>
 
-<scroll-view scroll-y >
-
-  <view class="text-center padding">
-<text class="text-center padding">源仁滑雪学校致力于青少年滑雪培训教育，创立初衷源于对滑雪的无限热情，致力于为每一个热爱滑雪的少年大招一个专业纯粹的滑雪空间，我们召集了一群有激情，有技术，有责任感，有资历的教练团队。通过专业的训练指导，科学规范的训练内容，让每一个人都燃出激情的火花</text>
 </view>
-
-
-
-<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{swiperList}}" wx:key>
-    <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
-    <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
-  </swiper-item>
-</swiper>
-<view style="margin-top:30rpx">
-  <button type="primary"  bindtap="showMapToSchool">点击查看前往雪场路线</button>
-</view>
-<view>
-  <image style="margin-top: 20px ;width:100%" src = "/images/active.jpg" mode = "aspectFill" > </image>
-</view>
-
-<view>
-  <video src="https://view.2amok.com/20201225/3d4acf80116a0c40c725f7ca950aee2d.mp4" controls="false" loop="true" autoplay="true" object-fit="fill" style="width:100%"></video>
-</view>
-
-
-</scroll-view >
+    
+      
+    </view>
+  </view>
 </view>
