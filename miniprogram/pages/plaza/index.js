@@ -7,7 +7,7 @@ Page({
   data: {
     PageCur: 'active',
     envId : '',
-    
+    studentInfo:{},
   },
 
   /**
@@ -27,7 +27,37 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    var user = getApp().globalData.user
+    if(user.curStudentId.length == 0){
+      wx.showLoading({
+        title: '',
+      })
+      wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        config: {
+          env: this.data.envId
+        },
+        data: {
+          type: 'searchStudent',
+          phoneNumber:user.phoneNumber
+        }
+      }).then((resp) => {
+        wx.hideLoading()
+        var students = resp.result.students
+        if(students.length == 0){
+          //todo 弹出添加学生窗口
+        }else{
+          user.setData({curStudentId:students[0]._id})
+          this.setData({
+            studentInfo:students[0]
+          })
+        }
 
+      }).catch((e) => {
+      
+       wx.hideLoading()
+      })
+    }
   },
 
   /**
@@ -65,15 +95,19 @@ Page({
 
   },
   NavChange(e) {
-    this.setData({
-      PageCur: e.currentTarget.dataset.cur
-    })
+  
+    
+      this.setData({
+        PageCur: e.currentTarget.dataset.cur
+      })
+  
+  
   },
   onShareAppMessage() {
     return {
-      title: 'ColorUI-高颜值的小程序UI组件库',
-      imageUrl: '/images/share.jpg',
-      path: '/pages/index/index'
+      title: '猿人滑雪',
+      // imageUrl: '/images/share.jpg',
+      path: '/pages/active/index'
     }
   },
   /**

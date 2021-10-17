@@ -28,7 +28,7 @@ App({
         _id:'1',
         _openid:'1',
         bindStudents:[],
-        phoneNumber:0,
+        phoneNumber:"",
         curStudentId:'',
         userInfo:{},
         setData:function(data){

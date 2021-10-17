@@ -8,35 +8,24 @@ Component({
       {name:'基础训练营1期'},
       {name:'基础训练营2期'}
     ],
-    swiperList: [{
-      id: 0,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
-    }, {
-      id: 1,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
-    }, {
-      id: 2,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-    }, {
-      id: 3,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-    }, {
-      id: 4,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
-    }, {
-      id: 5,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
-    }, {
-      id: 6,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-    }],
+    desList:[
+      {des1:"走出家门认识更广阔的世界",
+      des2:'不宅在家里，不面对手机，电视。开始人生新的探索'
+    },
+      {des1:"学会独立",
+      des2:'第一次独自出行，自己穿衣，打饭......'
+    },
+      {des1:"自理能力",
+      des2:'在教练和生活老师的指导下整理装备，物品，打包行囊。'
+    },
+      {des1:"社交能力",
+      des2:'在与新朋友与滑雪教练的相处中学会沟通协作'
+      },
+      {des1:"Get到炫酷的滑雪新技能，开启冠军之路",
+      des2:'专业的教学团队，科学的课程体系，真正获得滑雪技能。'
+      }
+    ],
+    
   },
 
   methods:{

@@ -100,11 +100,18 @@ Page({
       })
       
     }else{
-      if (user.phoneNumber == 0){ //没有授权手机号码
+      var phoneNumber = 0
+      try {
+        phoneNumber = wx.getStorageSync('phoneNumber')
+      } catch (error) {
+        
+      }
+      if (phoneNumber == 0){ //没有授权手机号码
         this.setData({
           showBtn : false
         })
       }else{
+        user.setData({phoneNumber : phoneNumber})
         this.jumpToPlaza()
       }
       
@@ -131,7 +138,14 @@ Page({
       }).then(res => {
         var user = getApp().globalData.user
         user.setData({phoneNumber : res.result})
-        this.UpdateUserInfo()
+        try{
+          // 数据存本地
+          wx.setStorageSync('phoneNumber', res.result)
+        }catch{
+
+        }
+        
+        // this.UpdateUserInfo()
         this.jumpToPlaza()
         
       }).catch(err => {
