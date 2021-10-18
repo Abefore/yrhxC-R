@@ -5,7 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      sexConfig:[
+        {
+          id:1,
+          des:'男'
+        },
+        {
+          id:2,
+          des:'女'
+        }
+      ],
+      selectIndex : 1,
+      birthdate:"2018-01-01",
+      name:'',
   },
 
   /**
@@ -62,5 +74,26 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  inputChange: function(e){
+    console.log(e)
+    this.setData({
+      name:e.detail.value
+    })
+},
+
+  changeSelect: function(e){
+      console.log(e)
+      this.setData({
+        selectIndex:e.currentTarget.dataset.index
+      })
+  },
+  dateChange: function(e){
+    this.setData({
+      birthdate:e.detail.value
+    })
+  },
+  cancel: function(){
+    wx.navigateBack()
   }
 })

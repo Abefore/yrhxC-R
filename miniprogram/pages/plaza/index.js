@@ -101,13 +101,15 @@ Page({
         PageCur: e.currentTarget.dataset.cur
       })
   
-  
+      wx.navigateTo({
+        url: '/pages/addStudent/index',
+      })
   },
   onShareAppMessage() {
     return {
       title: '猿人滑雪',
       // imageUrl: '/images/share.jpg',
-      path: '/pages/active/index'
+      path: 'pages/active/index'
     }
   },
   /**
