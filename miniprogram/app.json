@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/signUp/index",
     "pages/login/index",
     "pages/plaza/index",
     "pages/addStudent/index",

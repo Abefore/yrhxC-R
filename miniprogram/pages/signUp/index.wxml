@@ -1,0 +1,48 @@
+<view class="w-full h-full" >
+  <image src="/images/signUp/bg-color.png" class="all-full" style="position: absolute"></image>
+  <image src="/images/signUp/bg.png" class="all-full" style="position: absolute"></image>
+  <view class="all-full" style="display: flex; flex-direction: column; flex-wrap: wrap; justify-content: flex-strat; align-items: center;">
+    <view  style="width: 90%; height: 40%; margin-top: 10%;">
+      <image class="all-full" src="/images/view-bg.png" style="border-radius: 40rpx; opacity: 0.5;position: relative"></image>
+      <view  style="position:relative;top:-100%; border-radius: 40rpx; width: 100%; height: 100%;display:flex;flex-direction:column;align-items:center;flex-wrap: wrap;">
+        
+        <image src="/images/signUp/title-bg.png" style="width: 50%; height: 18%; margin-top:-8.1%;" >
+          <text class="all-full" style="color: #895a0e; font-size: 40rpx; position: relative; font-weight: 900; text-align: center; left: 25%; bottom: 80%">日程安排</text>
+        </image>
+        <view class="w-full" style="height:49rpx;display: flex; justify-content: center; align-items: center;">
+          <view wx:for="{{classList}}" wx:key="index" bindtap="changClass"
+           style="margin:10rpx; border-radius: 30rpx; background: #d2d2d2; width: 144rpx; height: 49rpx; text-align: center; font-weight: 900;display: flex;justify-content: center; align-items: center;">{{item.title}}</view>  
+        </view>
+        <view class="w-full" style="display: flex; flex-direction: column;justify-content: center; align-items: center;margin-top:15rpx;">
+          <view class="w-full" style="display: flex; align-items: center;height:47rpx;margin-top:15rpx;{{index % 2 == 0 ? 'background:#ffffff':''}}"
+            wx:for="{{classList[1].classInfos}}" wx:key="index"
+          >
+              <text style="text-align:left; width:30%;font-size:26rpx;font-color:#474747;font-weight: 900;margin-left:10%">{{item.timeDes}}</text>
+              <text style="text-align:left; width:60%;font-size:28rpx;font-color:#474747;font-weight: 900;">{{item.des}}</text>
+          </view>
+        </view>
+      </view>
+     
+      
+    </view>
+    <view  style="width: 90%; height: 40%; margin-top: 10%;">
+      <image class="all-full" src="/images/view-bg.png" style="border-radius: 40rpx; opacity: 0.5;position: relative"></image>
+      <view  style="position:relative;top:-100%; border-radius: 40rpx; width: 100%; height: 100%;display:flex;flex-direction:column;align-items:center;flex-wrap: wrap;">
+        
+        <image src="/images/signUp/title-bg.png" style="width: 50%; height: 18%; margin-top:-8.1%;" >
+          <text class="all-full" style="color: #895a0e; font-size: 40rpx; position: relative; font-weight: 900; text-align: center; left: 25%; bottom: 80%">报名细则</text>
+        </image>
+        <text  style="font-size:28rpx;font-color:#474747;font-weight: 900; width:85%;margin:5rpx">本期人数：15人</text>
+        <text  style="font-size:28rpx;font-color:#474747;font-weight: 900; width:85%;margin:5rpx">培训对象：6-12岁</text>
+        <text  style="font-size:28rpx;font-color:#474747;font-weight: 900; width:85%;margin:5rpx">营期：10月16日-10月17日，10月16日-10月17日</text>
+        <text  style="font-size:28rpx;font-color:#474747;font-weight: 900; width:85%;margin:5rpx">训练营地址：石家庄市鹿泉区西部长青冰雪小镇</text>
+        <text  style="font-size:28rpx;font-color:#474747;font-weight: 900; width:85%;margin:5rpx">报名要求：近期在本地生活，未前往中，高风险地区，体温正常，无其他健康问题</text>
+        <text  style="font-size:28rpx;font-color:#474747;font-weight: 900; width:85%;margin:5rpx">咨询电话1：0311-89601881</text>
+        <text  style="font-size:28rpx;font-color:#474747;font-weight: 900; width:85%;margin:5rpx">咨询电话2：18032838207</text>
+
+      </view>
+     
+      
+    </view>
+  </view>
+</view>

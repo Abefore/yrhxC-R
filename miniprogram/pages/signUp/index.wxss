@@ -1,0 +1,18 @@
+/* pages/signUp/index.wxss */
+page{
+  height: 100%;
+}
+.w-full{
+  width: 100%;
+}
+.h-full{
+  height: 100%;
+}
+.all-full{
+  width: 100%;
+  height: 100%;
+}
+.white-bg{
+  background: #ffffff;
+  opacity: 0.8;
+}
