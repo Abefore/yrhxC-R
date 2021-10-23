@@ -1,17 +1,17 @@
-<view style="background-color:#7FCBE6">
+<view style="background:#7FCBE6;width:100%;height:100%">
  
     <image src="/images/student/bg.png" style="position: absolute;left:0rpx;top:0rpx;width:100%" mode="widthFix"></image>
-    <view style="display:flex; flex-direction:column;flex-wrap:wrap;justify-content:center;width:100%;align-items:center;margin-top:5%">
+    <view style="display:flex; flex-direction:column;flex-wrap:wrap;justify-content:center;width:100%;align-items:center;margin-top:20%">
       <view style="height:237rpx;width:90%;">
         <image style="width:100%;height:100%"  src="/images/student/white-bg.png" mode="widthFix"></image>
         <view  style="position: relative; width: 90%; top:-100%; left:5%;height: 237rpx">
           <view  style="height:220rpx;width:100%;display:flex; flex-direction:row;flex-wrap:nowrap;align-items:center">
             <image src="/images/student/head.png" mode="heightFix" style="height:80%"></image>
             <view style="display: flex;flex-direction:column;flex-wrap:wrap;align-items: left;justify-content:space-around; margin-left:8%;height:100%;width:70%">
-              <text style="font-size:30rpx;font-weight:bold">高星星</text>
+              <text style="font-size:30rpx;font-weight:bold">{{studentInfo.name}}</text>
               <view>
                 <image src="/images/0-10.png" mode="widthFix" style="width:40%"></image>
-                <text style="font-size: 28rpx; color: #6b7579; position:absolute;left:50%;top:62%">Lv5</text>
+                <text style="font-size: 28rpx; color: #6b7579; position:absolute;left:50%;top:62%">Lv1</text>
               </view>
             </view>
             
@@ -19,13 +19,16 @@
         </view>
       </view>
       
-        <swiper style="margin-top:10%;width:100%" class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-          <swiper-item wx:for="{{swiperList}}" wx:key>
-            <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
-            <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+        <swiper style="margin-top:20%;width:100%;height:700rpx" class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="500">
+          <swiper-item wx:for="{{studentInfo.picList}}" wx:key="index">
+            <image src="{{picPath +studentInfo._id +'/' + studentInfo.picList[index]}}" mode="aspectFill" bindload="loadSuccess"></image>
+            <!-- <image src="{{picPath +'83cfc1ac616afe0600b878794e70a5a1'+'/' + studentInfo.picList[index]}}" mode="scaleToFill" bindload="loadSuccess"></image> -->
+            <!-- <image src="cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/students/18ed0968616afba50053b8ce4bf2c477/1.jpg" mode="aspectFill"></image> -->
+            <!-- <image src="{{picPath + item}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+            <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
           </swiper-item>
         </swiper>
-        <video src="https://view.2amok.com/20201225/3d4acf80116a0c40c725f7ca950aee2d.mp4" controls="false" loop="true" autoplay="true" object-fit="fill" style="width:100%;margin-top:10%"></video>
+        
     </view>
 </view>
 

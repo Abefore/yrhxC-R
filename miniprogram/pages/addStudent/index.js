@@ -95,5 +95,31 @@ Page({
   },
   cancel: function(){
     wx.navigateBack()
+  },
+  commit : function(e){
+    if (this.data.name == "" ){
+      wx.showToast({
+        title: '姓名不能为空',
+      })
+    }else{
+      var user = getApp().globalData.user
+      wx.showLoading({
+        title: '',
+      })
+      wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        data: {
+          weRunData: wx.cloud.CloudID(e.detail.cloudID),
+          type: 'addStudent',
+          name:this.data.name,
+          phoneNumber: user.phoneNumber
+        }
+      }).then((res) => {
+        wx.hideLoading()
+      })
+
+      // wx.navigateBack()
+    }
+   
   }
 })

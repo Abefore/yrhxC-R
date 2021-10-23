@@ -3,40 +3,14 @@
   <view class="first-bg">
     <image  src="/images/first/bg_small.png" style="width:100%;" mode="widthFix"></image>
   </view>
-  <!-- <view class="image-parent">
-   <image class="image" src="/images/first/title-bg.png" mode="widthFix"></image>
-    <text class="child" style="color:#ffffff;font-size:46rpx;margin-top:1%">预约报名</text>
-  </view>
-  <view class="signInView image-parent page-center" style="width: 85%; ">
-    <view class="image page-center" style="width:95%;background-color:#ffffff;border:10rpx solid #189bd8; border-radius:30rpx;">
-      <view class="signItem" wx:for="{{classList}}" wx:key="index" style="width:95%;height:225rpx; display: flex;flex-wrap:wrap;align-items:center">
-        <image class="page-center" src="/images/first/blue-bg.png"
-          style="width: 33%;  margin-left:30rpx;margin-right:30rpx" mode="widthFix">
-          <text class="child" style="color:#ffffff;">10.26-10.27</text>
-        </image>
-        <image src="/images/first/dot.png" style="width: 200rpx; "
-          mode="widthFix"></image>
-      
-        <text style=" margin-left: 30rpx; margin-top: 20rpx; font-size: 30rpx;font-weight:bold">{{item.name}}</text>
-        <button style="width:50%;display: flex;flex-wrap:wrap;align-items:center;justify-content:center">
-          <image src="/images/first/yellow-bg.png" mode="widthFix"></image>
-          <text class="child" style="top:25%;color:#ffffff;font-size:30rpx;">立即预约</text>
-        </button>
-
-      </view>
-    
-      
-    </view>
   
-    
-  </view> -->
   <view class="image-parent" style="margin-top:-5%">
     <image class="image" src="/images/first/title-bg.png" mode="widthFix"></image>
     <text class="child" style="color:#ffffff;font-size:46rpx;margin-top:2%">精彩回顾</text>
   </view>
   <view class="signInView image-parent page-center" style="width: 85%;height:356rpx;">
     <view class=" page-center" style="width:95%;height:94%;background-color:#ffffff;border:10rpx solid #189bd8; border-radius:30rpx;">
-      <video src="cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/default/default_home.mp4" controls="false" loop="true" autoplay="true" object-fit="fill" style="width:100%"></video>
+      <video src="cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/default/default_home.mp4" muted="true" controls="false" loop="true" autoplay="true" object-fit="fill" style="width:100%"></video>
     </view>
   </view>
 
@@ -64,4 +38,5 @@
       <!-- <video src="https://view.2amok.com/20201225/3d4acf80116a0c40c725f7ca950aee2d.mp4" controls="false" loop="true" autoplay="true" object-fit="fill" style="width:100%"></video> -->
     </view>
   </view>
+  <view style="width:100%;height:100rpx"></view>
 </view>

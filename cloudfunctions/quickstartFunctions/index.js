@@ -2,7 +2,7 @@ const getOpenId = require('./getOpenId/index')
 const updateUserInfo = require('./updateUserInfo/index')
 const searchStudents = require('./searchStudents/index')
 const getPhoneNumber = require('./getPhoneNumber/index')
-
+const addStudent = require('./addStudent/index')
 
 
 // ------------
@@ -36,6 +36,8 @@ exports.main = async (event, context) => {
     case 'searchStudent':
       return await searchStudents.main(event, context)
     case 'getPhoneNumber':
+      return await getPhoneNumber.main(event, context)
+    case 'addStudent':
       return await getPhoneNumber.main(event, context)
 
       

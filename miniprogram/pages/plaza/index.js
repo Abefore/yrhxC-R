@@ -47,7 +47,9 @@ Page({
         if(students.length == 0){
           //todo 弹出添加学生窗口
         }else{
-          user.setData({curStudentId:students[0]._id})
+          user.setData({curStudentId:students[0]._id,
+            bindStudents:students
+          })
           this.setData({
             studentInfo:students[0]
           })
@@ -101,9 +103,9 @@ Page({
         PageCur: e.currentTarget.dataset.cur
       })
   
-      wx.navigateTo({
-        url: '/pages/addStudent/index',
-      })
+      // wx.navigateTo({
+      //   url: '/pages/addStudent/index',
+      // })
   },
   onShareAppMessage() {
     return {
