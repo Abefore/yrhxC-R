@@ -96,7 +96,23 @@ Page({
   cancel: function(){
     wx.navigateBack()
   },
-  commit : function(e){
+  changeCurId:function(id){
+
+    wx.cloud.callFunction({
+      name: 'quickstartFunctions',
+      config: {
+        env: this.data.envId
+      },
+      data: {
+        
+        type: 'changeStudentId',
+        id:id
+      }
+  }).then((resp) => {
+    console.log(resp)
+  })
+},
+  commit:function(e){
     if (this.data.name == "" ){
       wx.showToast({
         title: '姓名不能为空',
@@ -108,14 +124,34 @@ Page({
       })
       wx.cloud.callFunction({
         name: 'quickstartFunctions',
+        config: {
+          env: this.data.envId
+        },
         data: {
-          weRunData: wx.cloud.CloudID(e.detail.cloudID),
-          type: 'addStudent',
+          
+           type: 'addStudent',
           name:this.data.name,
           phoneNumber: user.phoneNumber
         }
       }).then((res) => {
         wx.hideLoading()
+        if(res.result.state){
+          var user = getApp().globalData.user
+          var student = {
+            name:this.data.name,
+            phoneNumber: user.phoneNumber
+          }
+          user.bindStudents.push(student)
+          user.setData({
+            curStudentId:res.result.id
+          })
+          this.changeCurId(res.result.id)
+          wx.navigateBack()
+        }else{
+            wx.showToast({
+              title: '提交失败',
+            })
+        }
       })
 
       // wx.navigateBack()

@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/login/index",
-    "pages/signUp/index",
     "pages/plaza/index",
+    "pages/signUp/index",
     "pages/addStudent/index",
     "pages/active/index",
     "pages/student/index",

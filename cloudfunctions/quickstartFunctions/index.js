@@ -3,6 +3,7 @@ const updateUserInfo = require('./updateUserInfo/index')
 const searchStudents = require('./searchStudents/index')
 const getPhoneNumber = require('./getPhoneNumber/index')
 const addStudent = require('./addStudent/index')
+const changeStudentId = require('./changeStudentId/index')
 
 
 // ------------
@@ -38,8 +39,9 @@ exports.main = async (event, context) => {
     case 'getPhoneNumber':
       return await getPhoneNumber.main(event, context)
     case 'addStudent':
-      return await getPhoneNumber.main(event, context)
-
+      return await addStudent.main(event, context)
+    case 'changeStudentId':
+      return await changeStudentId.main(event, context)
       
   }
 }

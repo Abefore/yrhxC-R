@@ -60,9 +60,12 @@ Component({
             url: '/pages/addStudent/index',
           })
       }else{
-        wx.showLoading({
-          title: '',
-        })
+        if(info.picList && info.picList.length > 0){
+          wx.showLoading({
+            title: '',
+          })
+        }
+       
       }
      
       // this.towerSwiper('swiperList');
@@ -76,6 +79,13 @@ Component({
     show: function() {
       // 页面被展示
       console.log("show")
+      var user = getApp().globalData.user
+      if (user.bindStudents.length >0){
+        this.setData({
+          studentInfo:user.bindStudents[0]
+        })
+      }
+      
     },},
   methods:{
     onLoad:function(){

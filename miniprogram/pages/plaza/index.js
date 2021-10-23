@@ -28,7 +28,7 @@ Page({
    */
   onReady: function () {
     var user = getApp().globalData.user
-    if(user.curStudentId.length == 0){
+    // if(user.curStudentId.length == 0){
       wx.showLoading({
         title: '',
       })
@@ -47,26 +47,47 @@ Page({
         if(students.length == 0){
           //todo 弹出添加学生窗口
         }else{
-          user.setData({curStudentId:students[0]._id,
+          var  curdata = students[0]
+          if(user.curStudentId.length == 0){
+           
+            this.changeCurId(curdata._id)
+          }
+
+          
+          for (let index = 0; index < students.length; index++) {
+            const element = students[index];
+            if(element._id == user.curStudentId){
+              curdata = element
+              break
+            }            
+          }
+          user.setData({curStudentId:curdata._id,
             bindStudents:students
           })
           this.setData({
-            studentInfo:students[0]
+            studentInfo:curdata
           })
+          
         }
 
       }).catch((e) => {
       
        wx.hideLoading()
       })
-    }
+    // }
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var user = getApp().globalData.user
+    if (user.bindStudents.length >0){
+      this.setData({
+        studentInfo:user.bindStudents[0]
+      })
+    }
+    
   },
 
   /**
@@ -107,6 +128,24 @@ Page({
       //   url: '/pages/addStudent/index',
       // })
   },
+
+  changeCurId:function(id){
+
+    wx.cloud.callFunction({
+      name: 'quickstartFunctions',
+      config: {
+        env: this.data.envId
+      },
+      data: {
+        
+        type: 'changeStudentId',
+        id:id
+      }
+  }).then((resp) => {
+    console.log(resp)
+  })
+},
+
   onShareAppMessage() {
     return {
       title: '猿人滑雪',

@@ -55,7 +55,7 @@ Page({
       data: {
         type: 'updateUserInfo',
         data: {userInfo : user.userInfo,
-                phoneNumber:user.phoneNumber,
+                // phoneNumber:user.phoneNumber,
                }
       }
     }).then((resp) => {
@@ -145,7 +145,7 @@ Page({
 
         }
         
-        // this.UpdateUserInfo()
+        this.UpdateUserInfo()
         this.jumpToPlaza()
         
       }).catch(err => {

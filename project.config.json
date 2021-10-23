@@ -34,11 +34,12 @@
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
-    "showES6CompileOption": false
+    "showES6CompileOption": false,
+    "minifyWXML": true
   },
   "appid": "wx9a7a58c721c7e2c0",
   "projectname": "yrhxC",
-  "libVersion": "2.19.6",
+  "libVersion": "2.14.1",
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
