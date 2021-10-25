@@ -17,12 +17,12 @@
     </view>
     <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">首页</view>
   </view>
-  <view class="action" bindtap="NavChange" data-cur="student">
+  <view class="action" bindtap="NavChange" data-cur="student" >
     <view class='cuIcon-cu-image'>
       
       <image src="/images/student{{PageCur=='student'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='component'?'text-green':'text-gray'}}">个人</view>
+    <view class="{{PageCur=='component'?'text-green':'text-gray'}}" >个人</view>
   </view>
   <!-- <view class="action" bindtap="NavChange" data-cur="plugin">
     <view class='cuIcon-cu-image'>

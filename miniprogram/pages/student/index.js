@@ -12,6 +12,8 @@ Component({
     bindStudents:[],
     avatar:'/images/student/head.png',
     sex : 1,
+    showSearch:false,
+    hasPhone:false,
     swiperList: [{
       id: 0,
       type: 'image',
@@ -56,9 +58,10 @@ Component({
       // })
       var info = this.data.studentInfo
       if (Object.keys(info).length === 0){
-          wx.navigateTo({
-            url: '/pages/addStudent/index',
-          })
+          this.setData(
+            {showSearch:true}
+          )
+         
       }else{
         if(info.picList && info.picList.length > 0){
           wx.showLoading({
@@ -66,6 +69,16 @@ Component({
           })
         }
        
+      }
+      var user = getApp().globalData.user
+      if (user.phoneNumber.length == 0 ){
+        this.setData(
+          {hasPhone:false}
+        )
+      }else{
+        this.setData(
+          {hasPhone:true}
+        )
       }
      
       // this.towerSwiper('swiperList');
@@ -82,7 +95,13 @@ Component({
       var user = getApp().globalData.user
       if (user.bindStudents.length >0){
         this.setData({
-          studentInfo:user.bindStudents[0]
+          studentInfo:user.bindStudents[0],
+          showSearch:false
+        })
+        
+      }else{
+        this.setData({
+          showSearch:true
         })
       }
       
@@ -94,8 +113,101 @@ Component({
     },
     loadSuccess:function(){
       wx.hideLoading()
+    },
+    searchStudent:function(){
+      wx.navigateTo({
+        url: '/pages/addStudent/index',
+      })
+    },
+    getPhoneNumber(e){
+      console.log(e)
+      wx.showLoading({
+        title: '',
+      })
+        wx.cloud.callFunction({
+          name: 'quickstartFunctions',
+          data: {
+            weRunData: wx.cloud.CloudID(e.detail.cloudID),//
+            type: 'getPhoneNumber'
+          }
+        }).then(res => {
+          wx.hideLoading()
+          wx.showToast({
+            title: '授权成功',
+          })
+          var user = getApp().globalData.user
+          user.setData({phoneNumber : res.result})
+          this.setData({
+            hasPhone:true
+          })
+          try{
+            // 数据存本地
+            wx.setStorageSync('phoneNumber', res.result)
+          }catch{
+  
+          }
+          
+          
+         
+          
+        }).catch(err => {
+          console.log(err);
+        });
     }
 
       
-  }
+  },
+  checkStudent:function(){
+    var user = getApp().globalData.user
+    if (user.phoneNumber.length == 0){
+      return
+    }
+     if(user.curStudentId.length == 0){
+      wx.showLoading({
+        title: '',
+      })
+      wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        config: {
+          env: this.data.envId
+        },
+        data: {
+          type: 'searchStudent',
+          phoneNumber:user.phoneNumber
+        }
+      }).then((resp) => {
+        wx.hideLoading()
+        var students = resp.result.students
+        if(students.length == 0){
+          //todo 弹出添加学生窗口
+        }else{
+          var  curdata = students[0]
+          if(user.curStudentId.length == 0){
+           
+            this.changeCurId(curdata._id)
+          }
+
+          
+          for (let index = 0; index < students.length; index++) {
+            const element = students[index];
+            if(element._id == user.curStudentId){
+              curdata = element
+              break
+            }            
+          }
+          user.setData({curStudentId:curdata._id,
+            bindStudents:students
+          })
+          this.setData({
+            studentInfo:curdata
+          })
+          
+        }
+
+      }).catch((e) => {
+      
+       wx.hideLoading()
+      })
+    }
+  },
 })

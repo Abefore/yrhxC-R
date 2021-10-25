@@ -8,6 +8,7 @@ Page({
     PageCur: 'active',
     envId : '',
     studentInfo:{},
+    hasPhone:false,
   },
 
   /**
@@ -28,53 +29,7 @@ Page({
    */
   onReady: function () {
     var user = getApp().globalData.user
-    // if(user.curStudentId.length == 0){
-      wx.showLoading({
-        title: '',
-      })
-      wx.cloud.callFunction({
-        name: 'quickstartFunctions',
-        config: {
-          env: this.data.envId
-        },
-        data: {
-          type: 'searchStudent',
-          phoneNumber:user.phoneNumber
-        }
-      }).then((resp) => {
-        wx.hideLoading()
-        var students = resp.result.students
-        if(students.length == 0){
-          //todo 弹出添加学生窗口
-        }else{
-          var  curdata = students[0]
-          if(user.curStudentId.length == 0){
-           
-            this.changeCurId(curdata._id)
-          }
-
-          
-          for (let index = 0; index < students.length; index++) {
-            const element = students[index];
-            if(element._id == user.curStudentId){
-              curdata = element
-              break
-            }            
-          }
-          user.setData({curStudentId:curdata._id,
-            bindStudents:students
-          })
-          this.setData({
-            studentInfo:curdata
-          })
-          
-        }
-
-      }).catch((e) => {
-      
-       wx.hideLoading()
-      })
-    // }
+    this.checkStudent()
   },
 
   /**
@@ -118,12 +73,54 @@ Page({
 
   },
   NavChange(e) {
-  
+      var user = getApp().globalData.user
+      var phoneNumber = 0
+      try {
+        phoneNumber = wx.getStorageSync('phoneNumber')
+        if (phoneNumber == 0){ //没有授权手机号码
+            
+        }else{
+          user.setData({phoneNumber : phoneNumber})
+         
+        }
+      } catch (error) {
+        
+      }
+      if (Object.keys(user.userInfo).length === 0) {//没有用户数据
+        wx.showLoading({
+          title: '',
+        })
+        wx.getUserProfile({
+          desc: '完善会员资料',
+          success:(res)=>{
+            wx.showToast({
+              title: '授权成功',
+            })
+      
+            var user = getApp().globalData.user
+            user.setData({userInfo:res.userInfo})
+            
+           
+          
+              
+            this.checkStudent()
+            
+            this.UpdateUserInfo()
+       
+          },
+          complete:function(e){
+            wx.hideLoading()
+          }
+        })
+      }else{
+        this.setData({
+          PageCur: e.currentTarget.dataset.cur
+        })
     
-      this.setData({
-        PageCur: e.currentTarget.dataset.cur
-      })
-  
+      }
+
+    
+     
       // wx.navigateTo({
       //   url: '/pages/addStudent/index',
       // })
@@ -145,6 +142,87 @@ Page({
     console.log(resp)
   })
 },
+
+  checkStudent:function(){
+    var user = getApp().globalData.user
+    if (user.phoneNumber.length == 0 && user.curStudentId.length == 0){
+      return
+    }
+     
+      wx.showLoading({
+        title: '',
+      })
+      wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        config: {
+          env: this.data.envId
+        },
+        data: {
+          type: 'searchStudent',
+          phoneNumber:user.phoneNumber,
+          curStudentId:user.curStudentId
+        }
+      }).then((resp) => {
+        wx.hideLoading()
+        var students = resp.result.students
+        if(students.length == 0){
+          //todo 弹出添加学生窗口
+        }else{
+          var  curdata = students[0]
+          if(user.curStudentId.length == 0){
+           
+            this.changeCurId(curdata._id)
+          }
+
+          
+          for (let index = 0; index < students.length; index++) {
+            const element = students[index];
+            if(element._id == user.curStudentId){
+              curdata = element
+              break
+            }            
+          }
+          user.setData({curStudentId:curdata._id,
+            bindStudents:students
+          })
+          this.setData({
+            studentInfo:curdata
+          })
+          
+        }
+
+      }).catch((e) => {
+      
+       wx.hideLoading()
+      })
+    
+  },
+
+  UpdateUserInfo(){
+    var user = getApp().globalData.user
+    // wx.showLoading({
+    //   title: '',
+    // })
+   wx.cloud.callFunction({
+      name: 'quickstartFunctions',
+      config: {
+        env: this.data.envId
+      },
+      data: {
+        type: 'updateUserInfo',
+        data: {userInfo : user.userInfo,
+                // phoneNumber:user.phoneNumber,
+               }
+      }
+    }).then((resp) => {
+    
+     wx.hideLoading()
+   }).catch((e) => {
+     
+     wx.hideLoading()
+    })
+  },
+
 
   onShareAppMessage() {
     return {

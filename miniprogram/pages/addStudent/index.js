@@ -18,6 +18,7 @@ Page({
       selectIndex : 1,
       birthdate:"2018-01-01",
       name:'',
+      hasPhone:false,
   },
 
   /**
@@ -31,7 +32,16 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    var user = getApp().globalData.user
+    if (user.phoneNumber.length == 0 ){
+      this.setData(
+        {hasPhone:false}
+      )
+    }else{
+      this.setData(
+        {hasPhone:true}
+      )
+    }
   },
 
   /**
@@ -113,6 +123,15 @@ Page({
   })
 },
   commit:function(e){
+    if(this.data.hasPhone){
+      this.commitData()
+    }else{
+      this.getPhoneNumber(e)
+    }
+   
+  },
+
+  commitData:function(e){
     if (this.data.name == "" ){
       wx.showToast({
         title: '姓名不能为空',
@@ -135,6 +154,9 @@ Page({
         }
       }).then((res) => {
         wx.hideLoading()
+        wx.showToast({
+          title: '添加成功',
+        })
         if(res.result.state){
           var user = getApp().globalData.user
           var student = {
@@ -153,9 +175,42 @@ Page({
             })
         }
       })
-
-      // wx.navigateBack()
     }
-   
+  },
+
+  getPhoneNumber(e){
+    console.log(e)
+    wx.showLoading({
+      title: '',
+    })
+      wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        data: {
+          weRunData: wx.cloud.CloudID(e.detail.cloudID),//
+          type: 'getPhoneNumber'
+        }
+      }).then(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '授权成功',
+        })
+        var user = getApp().globalData.user
+        user.setData({phoneNumber : res.result})
+        this.setData({
+          hasPhone:true
+        })
+        try{
+          // 数据存本地
+          wx.setStorageSync('phoneNumber', res.result)
+        }catch{
+
+        }
+        
+        
+       
+        
+      }).catch(err => {
+        console.log(err);
+      });
   }
 })

@@ -18,10 +18,18 @@
           </view>
         </view>
       </view>
+      <block wx:if="{{showSearch}}">
+        <block wx:if="{{hasPhone}}">
+          <button  bindtap="searchStudent" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">添加学生</button>
+        </block>
+        <block wx:else>
+              <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">添加学生</button>
+            </block>
+      </block>
       
         <swiper style="margin-top:20%;width:100%;height:700rpx" class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="500">
           <swiper-item wx:for="{{studentInfo.picList}}" wx:key="index">
-            <image src="{{picPath +studentInfo._id +'/' + studentInfo.picList[index]}}" mode="aspectFill" bindload="loadSuccess"></image>
+            <image src="{{picPath +studentInfo._id +'/' + studentInfo.picList[index]}}" mode="aspectFill" bindload="loadSuccess" ></image>
             <!-- <image src="{{picPath +'83cfc1ac616afe0600b878794e70a5a1'+'/' + studentInfo.picList[index]}}" mode="scaleToFill" bindload="loadSuccess"></image> -->
             <!-- <image src="cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/students/18ed0968616afba50053b8ce4bf2c477/1.jpg" mode="aspectFill"></image> -->
             <!-- <image src="{{picPath + item}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>

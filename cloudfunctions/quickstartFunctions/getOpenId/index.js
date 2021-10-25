@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
     _id:wxContext.OPENID,
     _openid:wxContext.OPENID,
     curStudentId:'',
-    phoneNumber:0,
+    phoneNumber:'',
     userInfo:{}
   }
   

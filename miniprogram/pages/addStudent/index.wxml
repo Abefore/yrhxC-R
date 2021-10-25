@@ -5,12 +5,12 @@
         <image style="width:100%;height:120%;border-radius: 50rpx"  src="/images/student/white-bg.png" mode="scaleToFill"></image>
         <view style="width:100%;height:100%;position:relative;top:-110%;display:flex; flex-direction:column;flex-wrap:wrap;justify-content:center;align-items:center;">
           <view style="width: 90%;height:25%; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center">
-            <text>姓名</text>
+            <text>学生姓名</text>
             <input style="border-radius:15rpx;width:60%;text-align:right" auto-focus type="text"placeholder="请输入姓名 " bindinput="inputChange"/>
             <view class="splitLine"></view>
           </view>
           <view style="width: 90%;height:25%; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center">
-            <text>性别</text>
+            <text>学生性别</text>
               <view style="width:15%;height:100%;display: flex; flex-direction: row;align-items: center" wx:for="{{sexConfig}}" wx:key="index" data-index="{{index}}" bindtap="changeSelect">
                 <image src="/images/addStudent/{{index==selectIndex?'':'wei'}}xuanze.png" style="height:50%;" mode="heightFix" ></image>
                 <text style="font-size:26rpx;margin-left:10%">{{item.des}}</text>
@@ -19,7 +19,7 @@
           </view>
           <view style="width: 90%;height:25%; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center">
           <view style="width:100%;height:100%;display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center">
-            <text>日期</text>
+            <text>出生日期</text>
             <!-- <input style="border-radius:15rpx;width:60%;border:1rpx solid #000000;text-align:right" type="text"placeholder="请输入姓名 "/> -->
             <picker mode="date" value="{{birthdate}}" start="2008-09-01" end="2021-10-10" bindchange="dateChange">
               <view class="picker">
@@ -32,7 +32,12 @@
           </view>
           <view style="width: 90%;height:25%; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: center">
             <button bindtap="cancel" style="background:#d2d2d2;border-radius: 50rpx;width:45%;color:#ffffff">取消</button>
-            <button bindtap="commit" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">确定</button>
+            <block wx:if="{{hasPhone}}">
+              <button  bindtap="commitData" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">确定</button>
+            </block>
+            <block wx:else>
+              <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">确定</button>
+            </block>
           </view>
         </view>
          

@@ -93,37 +93,14 @@ Page({
       user.setData(resp.result.userInfo)
   
      wx.hideLoading()
-       //  判断是否有已经存在的用户
-    if (Object.keys(user.userInfo).length === 0) {//没有用户数据
-      this.setData({
-        showBtn : true
-      })
-      
-    }else{
-      var phoneNumber = 0
-      try {
-        phoneNumber = wx.getStorageSync('phoneNumber')
-      } catch (error) {
-        
-      }
-      if (phoneNumber == 0){ //没有授权手机号码
-        this.setData({
-          showBtn : false
-        })
-      }else{
-        user.setData({phoneNumber : phoneNumber})
-        this.jumpToPlaza()
-      }
-      
-      // this.jumpToPlaza()
-    }
+     this.jumpToPlaza()
    }).catch((e) => {
       this.setData({
         // showUploadTip: true
       })
      wx.hideLoading()
     })
-  
+    
     
   },
 // h获取电话号码

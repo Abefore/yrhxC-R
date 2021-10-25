@@ -9,12 +9,22 @@ exports.main = async (event, context) => {
   var list = [];
   try {
     const db = cloud.database();
-    await db.collection('students').where({
-      phoneNumber:parseInt( event.phoneNumber)
-    }).get().then(res=>{
-      list = res.data
-      // if (res.data.length == 0) {}
-    })
+    if(event.phoneNumber.length > 0){
+      await db.collection('students').where({
+        phoneNumber:parseInt( event.phoneNumber)
+      }).get().then(res=>{
+        list = res.data
+        // if (res.data.length == 0) {}
+      })
+    }else if( event.curStudentId.length > 0){
+      await db.collection('students').where({
+        _id:event.curStudentId
+      }).get().then(res=>{
+        list = res.data
+        // if (res.data.length == 0) {}
+      })
+    }
+    
   } catch (error) {
     
   };
