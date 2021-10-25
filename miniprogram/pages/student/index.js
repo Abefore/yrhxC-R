@@ -3,8 +3,8 @@ Component({
     addGlobalClass: true,
   },
   properties:{
-    studentInfo:Object
-  },
+    studentInfo:Object,
+   },
   data:{
     hasBind:true,
     searchTips:'请根据联系电话查找',
@@ -14,48 +14,21 @@ Component({
     sex : 1,
     showSearch:false,
     hasPhone:false,
-    swiperList: [{
-      id: 0,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
-    }, {
-      id: 1,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
-    }, {
-      id: 2,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-    }, {
-      id: 3,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-    }, {
-      id: 4,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
-    }, {
-      id: 5,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
-    }, {
-      id: 6,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-    }],
+    imgIndex:0,
+    imageFileID:[],
+    imageFilePath:[],
+    
  
   searchResp:[],
   },
   lifetimes:{
     created:function(){
       console.log("created")
-      // this.towerSwiper('swiperList');
+     
     },
     attached:function(){
       console.log("attached")
-      // this.setData({
-      //   bindStudents:getApp().globalData.user.bindStudents,
-      // })
+    
       var info = this.data.studentInfo
       if (Object.keys(info).length === 0){
           this.setData(
@@ -64,9 +37,10 @@ Component({
          
       }else{
         if(info.picList && info.picList.length > 0){
-          wx.showLoading({
-            title: '',
-          })
+          // wx.showLoading({
+          //   title: '',
+          // })
+          this.getAllPath()
         }
        
       }
@@ -81,11 +55,11 @@ Component({
         )
       }
      
-      // this.towerSwiper('swiperList');
+  
     },
     detached:function(){
       console.log("detached")
-      // this.towerSwiper('swiperList');
+     
     },
   },
   pageLifetimes: {
@@ -111,7 +85,7 @@ Component({
       console.log("onload")
       // this.towerSwiper('swiperList');
     },
-    loadSuccess:function(){
+    loadSuccess:function(e){
       wx.hideLoading()
     },
     searchStudent:function(){
@@ -140,6 +114,7 @@ Component({
           this.setData({
             hasPhone:true
           })
+          this.checkStudent()
           try{
             // 数据存本地
             wx.setStorageSync('phoneNumber', res.result)
@@ -153,61 +128,191 @@ Component({
         }).catch(err => {
           console.log(err);
         });
-    }
+    },
 
-      
-  },
-  checkStudent:function(){
-    var user = getApp().globalData.user
-    if (user.phoneNumber.length == 0){
-      return
-    }
-     if(user.curStudentId.length == 0){
-      wx.showLoading({
-        title: '',
-      })
+    checkStudent:function(){
+      var user = getApp().globalData.user
+      if (user.phoneNumber.length == 0){
+        return
+      }
+       if(user.curStudentId.length == 0){
+        wx.showLoading({
+          title: '',
+        })
+        wx.cloud.callFunction({
+          name: 'quickstartFunctions',
+          config: {
+            env: this.data.envId
+          },
+          data: {
+            type: 'searchStudent',
+            phoneNumber:user.phoneNumber
+          }
+        }).then((resp) => {
+          wx.hideLoading()
+          var students = resp.result.students
+          if(students.length == 0){
+            //todo 弹出添加学生窗口
+          }else{
+            var  curdata = students[0]
+            if(user.curStudentId.length == 0){
+             
+              this.changeCurId(curdata._id)
+            }
+  
+            
+            for (let index = 0; index < students.length; index++) {
+              const element = students[index];
+              if(element._id == user.curStudentId){
+                curdata = element
+                break
+              }            
+            }
+            user.setData({curStudentId:curdata._id,
+              bindStudents:students
+            })
+            this.setData({
+              studentInfo:curdata,
+              showSearch:false
+            })
+            this.getAllPath()
+          }
+  
+        }).catch((e) => {
+        
+         wx.hideLoading()
+        })
+      }
+    },
+    changeCurId:function(id){
+
       wx.cloud.callFunction({
         name: 'quickstartFunctions',
         config: {
           env: this.data.envId
         },
         data: {
-          type: 'searchStudent',
-          phoneNumber:user.phoneNumber
-        }
-      }).then((resp) => {
-        wx.hideLoading()
-        var students = resp.result.students
-        if(students.length == 0){
-          //todo 弹出添加学生窗口
-        }else{
-          var  curdata = students[0]
-          if(user.curStudentId.length == 0){
-           
-            this.changeCurId(curdata._id)
-          }
-
           
-          for (let index = 0; index < students.length; index++) {
-            const element = students[index];
-            if(element._id == user.curStudentId){
-              curdata = element
-              break
-            }            
+          type: 'changeStudentId',
+          id:id
+        }
+    }).then((resp) => {
+      console.log(resp)
+    })
+    },
+
+    getAllPath:function(){
+      var info = this.data.studentInfo
+      var imageFileID = []
+        for (let index = 0; index < info.picList.length; index++) {
+          const element = info.picList[index];
+          imageFileID[index] = this.data.picPath +info._id +'/' +element
+        }
+        this.setData({imageFileID:imageFileID})
+        wx.cloud.getTempFileURL({
+          fileList:imageFileID
+        }).then(res=>{
+          console.log(res.fileList)
+          var imageFilePath = []
+          for (let index = 0; index < res.fileList.length; index++) {
+            const element = res.fileList[index];
+            if(element.status == 0){
+              imageFilePath[index] = element.tempFileURL
+            }
+            
           }
-          user.setData({curStudentId:curdata._id,
-            bindStudents:students
-          })
           this.setData({
-            studentInfo:curdata
+            imageFilePath:imageFilePath
           })
-          
-        }
+        }).catch(err => {
 
-      }).catch((e) => {
+        })
+    },
+    // saveImg(e){
+    //   let url = this.data.imageFileID[this.data.imgIndex]//e.currentTarget.dataset.url;
+    //   wx.cloud.downloadFile({
+    //     fileID:url,
+    //   }).then(res => {
+    //     // get temp file path
+    //     console.log(res.tempFilePath)
+    //   }).catch(error => {
+    //     // handle error
+    //     console.log(error)
+    //   })
+    //   return
+     
+    //   if (url && url.length > 0){
+    //       //用户需要授权
+    //     wx.getSetting({
+    //       success: (res) => {
+    //       if (!res.authSetting['scope.writePhotosAlbum']) {
+    //         wx.authorize({
+    //         scope: 'scope.writePhotosAlbum',
+    //         success:()=> {
+    //           // 同意授权
+    //           this.saveImg1(url);
+    //         },
+    //         fail: (res) =>{
+    //           console.log(res);
+    //         }
+    //         })
+    //       }else{
+    //         // 已经授权了
+    //         this.saveImg1(url);
+    //       }
+    //       },
+    //       fail: (res) =>{
+    //       console.log(res);
+    //       }
+    //     })  
+    //   }
       
-       wx.hideLoading()
+    //  },
+    //  saveImg1(url){
+    //   wx.getImageInfo({
+    //    src: url,
+    //    success:(res)=> {
+    //     let path = res.path;
+    //     wx.saveImageToPhotosAlbum({
+    //      filePath:path,
+    //      success:(res)=> { 
+    //       console.log(res);
+    //      },
+    //      fail:(res)=>{
+    //       console.log(res);
+    //      }
+    //     })
+    //    },
+    //    fail:(res)=> {
+    //     console.log(res);
+    //    }
+    //   })
+    //  },
+    //  slideChangeEnd:function(e){
+    //   this.setData({
+    //     imgIndex:e.detail.current
+    //   })
+    //  },
+    prePic:function(){
+      var index = this.data.imgIndex
+      index = index - 1
+      if (index < 0){
+        index = 0
+      }
+      this.setData({
+        imgIndex:index
       })
-    }
+    },
+    nextPic:function(){
+      var index = this.data.imgIndex
+      index = index + 1
+      if (index >= this.data.imageFileID.length){
+        index = this.data.imageFileID.length - 1
+      }
+      this.setData({
+        imgIndex:index
+      })
+    },
   },
+  
 })

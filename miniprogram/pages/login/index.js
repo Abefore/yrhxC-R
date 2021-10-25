@@ -68,7 +68,7 @@ Page({
   },
 
   jumpToPlaza(){
-   
+      
        wx.redirectTo({
      
         url: `/pages/plaza/index?envId=${this.data.envId}`,

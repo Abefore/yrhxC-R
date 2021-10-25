@@ -26,16 +26,25 @@
               <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">添加学生</button>
             </block>
       </block>
-      
-        <swiper style="margin-top:20%;width:100%;height:700rpx" class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="500">
+        <image style="margin-top:20%;width:100%;height:700rpx" src="{{imageFileID[imgIndex]}}"  mode="aspectFill" show-menu-by-longpress="true" ></image>
+        <block wx:if="{{imageFileID.length > 0}}">
+          <text style="margin: 30rpx;color: #6b7579;">长按可保存图片</text>
+          <view style="width: 100%;display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: center">
+            <button wx:if="{{imgIndex > 0}}"  bindtap="prePic" style="background:#245aaf;border-radius: 50rpx;width:30%;color:#ffffff;font-size: small;">上一张</button>
+            <button  wx:if="{{imgIndex + 1 < imageFileID.length }}" bindtap="nextPic" style="background:#245aaf;border-radius: 50rpx;width:30%;color:#ffffff;font-size: small;">下一张</button>
+          </view>
+        </block>
+       
+        <!-- <swiper style="margin-top:20%;width:100%;height:700rpx" class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="500" bindlongpress="saveImg" bindchange="slideChangeEnd">
           <swiper-item wx:for="{{studentInfo.picList}}" wx:key="index">
-            <image src="{{picPath +studentInfo._id +'/' + studentInfo.picList[index]}}" mode="aspectFill" bindload="loadSuccess" ></image>
+          <image src="{{imageFileID[index]}}" mode="aspectFill" bindload="loadSuccess" ></image>
+            <!-- <image src="{{picPath +studentInfo._id +'/' + studentInfo.picList[index]}}" mode="aspectFill" bindload="loadSuccess" show-menu-by-longpress="true"></image> -->
             <!-- <image src="{{picPath +'83cfc1ac616afe0600b878794e70a5a1'+'/' + studentInfo.picList[index]}}" mode="scaleToFill" bindload="loadSuccess"></image> -->
-            <!-- <image src="cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/students/18ed0968616afba50053b8ce4bf2c477/1.jpg" mode="aspectFill"></image> -->
+            <!-- <image src="cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/students/83cfc1ac616afe0600b8786e041cc1d9/1.jpg" data-url="cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/students/83cfc1ac616afe0600b8786e041cc1d9/1.jpg" mode="aspectFill" ></image> -->
             <!-- <image src="{{picPath + item}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
             <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
-          </swiper-item>
-        </swiper>
+          <!-- </swiper-item>
+        </swiper> --> 
         
     </view>
 </view>
