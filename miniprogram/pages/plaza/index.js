@@ -8,7 +8,7 @@ Page({
     PageCur: 'active',
     envId : '',
     studentInfo:{},
-    hasPhone:false,
+ 
   },
 
   /**
@@ -29,6 +29,18 @@ Page({
    */
   onReady: function () {
     var user = getApp().globalData.user
+    var phoneNumber = 0
+    try {
+      phoneNumber = wx.getStorageSync('phoneNumber')
+      if (phoneNumber == 0){ //没有授权手机号码
+          
+      }else{
+        user.setData({phoneNumber : phoneNumber})
+       
+      }
+    } catch (error) {
+      
+    }
     this.checkStudent()
   },
 
@@ -73,19 +85,17 @@ Page({
 
   },
   NavChange(e) {
-      var user = getApp().globalData.user
-      var phoneNumber = 0
-      try {
-        phoneNumber = wx.getStorageSync('phoneNumber')
-        if (phoneNumber == 0){ //没有授权手机号码
-            
-        }else{
-          user.setData({phoneNumber : phoneNumber})
-         
-        }
-      } catch (error) {
-        
-      }
+    var target = e.currentTarget.dataset.cur
+    if(this.data.PageCur ==  target){
+      return
+    }
+    // 检查手机号
+    var user = getApp().globalData.user
+   
+
+    if (target == "achievement"){
+    
+   
       if (Object.keys(user.userInfo).length === 0) {//没有用户数据
         wx.showLoading({
           title: '',
@@ -112,18 +122,18 @@ Page({
             wx.hideLoading()
           }
         })
-      }else{
-        this.setData({
-          PageCur: e.currentTarget.dataset.cur
-        })
-    
+        return
       }
-
+    }
+      
+    this.setData({
+      PageCur: e.currentTarget.dataset.cur
+    })
+    
+    
     
      
-      // wx.navigateTo({
-      //   url: '/pages/addStudent/index',
-      // })
+     
   },
 
   changeCurId:function(id){
@@ -145,6 +155,9 @@ Page({
 
   checkStudent:function(){
     var user = getApp().globalData.user
+    // if (Object.keys(user.userInfo).length != 0){
+    //   return
+    // }
     if (user.phoneNumber.length == 0 && user.curStudentId.length == 0){
       return
     }
@@ -223,7 +236,9 @@ Page({
     })
   },
 
-
+  getPhoneNumber:function(e){
+    console.log(e)
+  },
   onShareAppMessage() {
     return {
       title: '猿人滑雪',

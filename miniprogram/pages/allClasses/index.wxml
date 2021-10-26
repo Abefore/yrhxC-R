@@ -1,0 +1,14 @@
+<view style="width: 100%;height: 100%;">
+  <image src="/images/allClasses/BG-HE.png" mode="widthFix" style="position: absolute; width: 100%;bottom: 0%;"></image>
+  <view style="width: 100%;height: 100%; display:flex; flex-direction:column;flex-wrap:wrap; align-items:center;margin-top:10%">
+    <view wx:for="{{classList}}" wx:key="index" style="width: 90%; height: 120rpx;" bindtap="showDetail" data-index="{{index}}">
+      <image src="/images/allClasses/item-bg1.png" mode="widthFix" style="width: 100%; position: relative; left: 0%;">
+        
+      </image>
+      
+      <text style="width: 80%; left: 15%; margin-top: 4.5%; position: absolute;font-size: 30rpx; color:#ffffff">{{item.title + '精彩回顾'}}</text>
+      <image src="/images/allClasses/xiangqing.png" mode="heightFix" style="height: 40%;position: relative;left: 87%;bottom:80%; "></image>
+      
+    </view>
+  </view>
+</view>

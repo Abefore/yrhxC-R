@@ -18,7 +18,7 @@
           </view>
         </view>
       </view>
-      <button  bindtap="saveImg" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">下载</button>
+      <!-- <button  bindtap="saveImg" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">下载</button> -->
       <block wx:if="{{showSearch}}">
         <block wx:if="{{hasPhone}}">
           <button  bindtap="searchStudent" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">添加学生</button>
