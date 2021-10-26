@@ -228,46 +228,55 @@ Component({
 
         })
     },
-    // saveImg(e){
-    //   let url = this.data.imageFileID[this.data.imgIndex]//e.currentTarget.dataset.url;
-    //   wx.cloud.downloadFile({
-    //     fileID:url,
-    //   }).then(res => {
-    //     // get temp file path
-    //     console.log(res.tempFilePath)
-    //   }).catch(error => {
-    //     // handle error
-    //     console.log(error)
-    //   })
-    //   return
+    downLoad:function(){
+      wx.cloud.downloadFile({
+        fileID:'cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/default/test.mp4',
+        success: res => {
+          // 返回临时文件路径
+          console.log(res.tempFilePath)
+          wx.saveImageToPhotosAlbum({
+                 filePath:res.tempFilePath,
+                 success:(res)=> { 
+                  console.log(res);
+                 },
+                 fail:(res)=>{
+                  console.log(res);
+                 }
+                })
+        },
+        fail: console.error
+      })
      
-    //   if (url && url.length > 0){
-    //       //用户需要授权
-    //     wx.getSetting({
-    //       success: (res) => {
-    //       if (!res.authSetting['scope.writePhotosAlbum']) {
-    //         wx.authorize({
-    //         scope: 'scope.writePhotosAlbum',
-    //         success:()=> {
-    //           // 同意授权
-    //           this.saveImg1(url);
-    //         },
-    //         fail: (res) =>{
-    //           console.log(res);
-    //         }
-    //         })
-    //       }else{
-    //         // 已经授权了
-    //         this.saveImg1(url);
-    //       }
-    //       },
-    //       fail: (res) =>{
-    //       console.log(res);
-    //       }
-    //     })  
-    //   }
+    },
+    saveImg(e){
+  
+  
+          //用户需要授权
+        wx.getSetting({
+          success: (res) => {
+          if (!res.authSetting['scope.writePhotosAlbum']) {
+            wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success:()=> {
+              // 同意授权
+              this.downLoad();
+            },
+            fail: (res) =>{
+              console.log(res);
+            }
+            })
+          }else{
+            // 已经授权了
+            this.downLoad();
+          }
+          },
+          fail: (res) =>{
+          console.log(res);
+          }
+        })  
       
-    //  },
+      
+     },
     //  saveImg1(url){
     //   wx.getImageInfo({
     //    src: url,

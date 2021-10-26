@@ -30,7 +30,7 @@ Component({
 
   methods:{
     onLoad:function(){
-     
+      this.showMapToSchool()
     },
 
     
