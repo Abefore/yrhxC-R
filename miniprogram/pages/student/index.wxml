@@ -1,7 +1,7 @@
 <view style="background:#7FCBE6;width:100%;height:100%">
  
     <image src="/images/student/bg.png" style="position: absolute;left:0rpx;top:0rpx;width:100%" mode="widthFix"></image>
-    <view style="display:flex; flex-direction:column;flex-wrap:wrap;justify-content:center;width:100%;align-items:center;margin-top:20%">
+    <view style="display: flex; flex-direction: column; flex-wrap: wrap; justify-content: flex-start; width: 100%; align-items: center; margin-top: 20%; height: 100%">
       <view style="height:237rpx;width:90%;">
         <image style="width:100%;height:100%"  src="/images/student/white-bg.png" mode="widthFix"></image>
         <view  style="position: relative; width: 90%; top:-100%; left:5%;height: 237rpx">
@@ -18,8 +18,23 @@
           </view>
         </view>
       </view>
+    
+      
+     
+     
+      
+      <image src="/images/noData-bg.png" mode="widthFix" style="width: 90%;margin-top: 10%;">
+        <text style="color:rgb(29, 3, 3); font-size: 46rpx; text-align: center; width: 100%; height: 50rpx; position: absolute; top: 10rpx;font-weight: 900;">成就系统</text>
+      </image>
+      
+        
+    </view>
+</view>
+<!-- <view style="width: 90%; height: 200rpx;" bindtap="showAllClass">
+      <image src="/images/center/item-icon1.png" mode="widthFix" style="width: 100%;height: 100%;"></image>
+      </view> -->
       <!-- <button  bindtap="saveImg" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">下载</button> -->
-      <block wx:if="{{showSearch}}">
+      <!-- <block wx:if="{{showSearch}}">
         <block wx:if="{{hasPhone}}">
           <button  bindtap="searchStudent" style="background:#245aaf;border-radius: 50rpx;width:45%;color:#ffffff">添加学生</button>
         </block>
@@ -34,7 +49,7 @@
             <button wx:if="{{imgIndex > 0}}"  bindtap="prePic" style="background:#245aaf;border-radius: 50rpx;width:30%;color:#ffffff;font-size: small;">上一张</button>
             <button  wx:if="{{imgIndex + 1 < imageFileID.length }}" bindtap="nextPic" style="background:#245aaf;border-radius: 50rpx;width:30%;color:#ffffff;font-size: small;">下一张</button>
           </view>
-        </block>
+        </block> -->
        
         <!-- <swiper style="margin-top:20%;width:100%;height:700rpx" class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="500" bindlongpress="saveImg" bindchange="slideChangeEnd">
           <swiper-item wx:for="{{studentInfo.picList}}" wx:key="index">
@@ -46,10 +61,6 @@
             <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
           <!-- </swiper-item>
         </swiper> --> 
-        
-    </view>
-</view>
-
 <!-- 
 <scroll-view scroll-y class="scrollPage ">
 

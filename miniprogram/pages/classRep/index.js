@@ -30,14 +30,18 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    if(this.data.imageFileID.length > 0){
+      wx.showLoading({
+        title: 'loading',
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      
   },
 
   /**
@@ -76,6 +80,9 @@ Page({
     this.setData({
       imgIndex:index
     })
+    wx.showLoading({
+      title: 'loading',
+    })
   },
   nextPic:function(){
     var index = this.data.imgIndex
@@ -86,8 +93,16 @@ Page({
     this.setData({
       imgIndex:index
     })
+    wx.showLoading({
+      title: 'loading',
+    })
   },
-
+  loadImageFinish:function(e){
+    wx.hideLoading()
+  },
+  hideLoading:function(){
+    wx.hideLoading()
+  },
   /**
    * 用户点击右上角分享
    */

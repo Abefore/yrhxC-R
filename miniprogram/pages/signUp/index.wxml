@@ -14,7 +14,7 @@
            style="margin:10rpx; border-radius: 30rpx; background: #d2d2d2; width: 144rpx; height: 49rpx; text-align: center; font-weight: 900;display: flex;justify-content: center; align-items: center;">{{item.title}}</view>  
         </view>
         <view class="w-full" style="display: flex; flex-direction: column;justify-content: center; align-items: center;margin-top:15rpx;">
-          <view class="w-full" style="display: flex; align-items: center;height:47rpx;margin-top:15rpx;{{index % 2 == 0 ? 'background:#ffffff':''}}"
+          <view class="w-full" style="display: flex; align-items: center;height:47rpx;margin-top:15rpx;"
             wx:for="{{classList[1].classInfos}}" wx:key="index"
           >
               <text style="text-align:left; width:30%;font-size:26rpx;font-color:#474747;font-weight: 900;margin-left:10%">{{item.timeDes}}</text>

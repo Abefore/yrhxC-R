@@ -322,6 +322,12 @@ Component({
         imgIndex:index
       })
     },
+    showAllClass:function(){
+      var c = JSON.stringify(this.data.studentInfo)
+      wx.navigateTo({
+        url: '/pages/allClasses/index?studentInfo=' + JSON.stringify(this.data.studentInfo),
+      })
+    },
   },
   
 })
