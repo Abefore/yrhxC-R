@@ -32,7 +32,7 @@ Page({
   onReady: function () {
     if(this.data.imageFileID.length > 0){
       wx.showLoading({
-        title: 'loading',
+        title: '加载图片',
       })
     }
   },
@@ -81,7 +81,7 @@ Page({
       imgIndex:index
     })
     wx.showLoading({
-      title: 'loading',
+      title: '加载图片',
     })
   },
   nextPic:function(){
@@ -94,7 +94,7 @@ Page({
       imgIndex:index
     })
     wx.showLoading({
-      title: 'loading',
+      title: '加载图片',
     })
   },
   loadImageFinish:function(e){

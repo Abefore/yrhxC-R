@@ -8,7 +8,7 @@ Page({
     PageCur: 'active',
     envId : '',
     studentInfo:{},
- 
+    getPhone:false,
   },
 
   /**
@@ -33,7 +33,9 @@ Page({
     try {
       phoneNumber = wx.getStorageSync('phoneNumber')
       if (phoneNumber == 0){ //没有授权手机号码
-          
+          this.setData({
+            getPhone:true
+          })
       }else{
         user.setData({phoneNumber : phoneNumber})
        
@@ -238,6 +240,39 @@ Page({
 
   getPhoneNumber:function(e){
     console.log(e)
+    wx.showLoading({
+      title: '',
+    })
+      wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        data: {
+          weRunData: wx.cloud.CloudID(e.detail.cloudID),//
+          type: 'getPhoneNumber'
+        }
+      }).then(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '授权成功',
+        })
+        var user = getApp().globalData.user
+        user.setData({phoneNumber : res.result})
+        this.setData({
+          getPhone:false
+        })
+        this.checkStudent()
+        try{
+          // 数据存本地
+          wx.setStorageSync('phoneNumber', res.result)
+        }catch{
+
+        }
+        
+        
+       
+        
+      }).catch(err => {
+        console.log(err);
+      });
   },
   onShareAppMessage() {
     return {
