@@ -8,6 +8,7 @@ Page({
     imgIndex:0,
     imageFileID:[],
     picPath:getApp().globalData.filePath + "students/",
+    videoPath:'cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/default/class1.mp4',
   },
 
   /**
@@ -23,7 +24,10 @@ Page({
       const element = studentInfo.picList[index];
       imageFileID[index] = this.data.picPath +studentInfo._id +'/' +element
     }
-    this.setData({imageFileID:imageFileID})
+    this.setData({
+      imageFileID:imageFileID,
+      videoPath:this.data.picPath +studentInfo._id +'/'+ 'col.mp4'
+    })
   },
 
   /**
