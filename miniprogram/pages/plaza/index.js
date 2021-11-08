@@ -240,6 +240,9 @@ Page({
 
   getPhoneNumber:function(e){
     console.log(e)
+    if (e.detail.errMsg !== "getPhoneNumber:ok"){
+      return
+    }
     wx.showLoading({
       title: '',
     })
@@ -285,4 +288,4 @@ Page({
    * 用户点击右上角分享
    */
 
-})
+}) 
