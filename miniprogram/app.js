@@ -31,6 +31,7 @@ App({
         bindStudents:[],
         phoneNumber:"",
         curStudentId:'',
+        special:false,
         userInfo:{},
         setData:function(data){
           this._id = data._id ? data._id : this._id
@@ -39,6 +40,7 @@ App({
           this.userInfo = data.userInfo ? data.userInfo : this.userInfo
           this.phoneNumber = data.phoneNumber ? data.phoneNumber : this.phoneNumber
           this.curStudentId = data.curStudentId ? data.curStudentId : this.curStudentId
+          this.special = data.hasOwnProperty ("special")? data.special : this.special
 
         },
         

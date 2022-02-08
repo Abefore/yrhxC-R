@@ -1,8 +1,12 @@
 /* pages/addStudent/index.wxss */
+page{
+  width: 100%;
+}
 .splitLine{
   background: #E0E3DA;
   width: 100%;
   height: 5rpx;
+  margin-bottom: 0pt;
 }
 .cu-form-grup.title{
   min-width: calc(4em + 30rpx);

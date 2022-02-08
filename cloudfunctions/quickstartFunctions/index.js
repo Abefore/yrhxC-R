@@ -4,7 +4,9 @@ const searchStudents = require('./searchStudents/index')
 const getPhoneNumber = require('./getPhoneNumber/index')
 const addStudent = require('./addStudent/index')
 const changeStudentId = require('./changeStudentId/index')
-
+const GetStudentInfo = require('./GetStudentInfo/index')
+const CommitStudentAchives = require('./CommitStudentAchives/index')
+const GetAllClasses = require('./GetAllClasses/index')
 
 // ------------
 const getMiniProgramCode = require('./getMiniProgramCode/index')
@@ -36,12 +38,18 @@ exports.main = async (event, context) => {
       return await updateUserInfo.main(event, context)
     case 'searchStudent':
       return await searchStudents.main(event, context)
+    case 'GetStudentInfo':
+      return await GetStudentInfo.main(event, context)
     case 'getPhoneNumber':
       return await getPhoneNumber.main(event, context)
     case 'addStudent':
       return await addStudent.main(event, context)
     case 'changeStudentId':
       return await changeStudentId.main(event, context)
+    case 'CommitStudentAchives':
+      return await CommitStudentAchives.main(event, context)
+    case 'GetAllClasses':
+      return await GetAllClasses.main(event,context)
       
   }
 }

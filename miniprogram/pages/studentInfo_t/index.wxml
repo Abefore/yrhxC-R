@@ -1,0 +1,83 @@
+<view style="background:#7FCBE6;width:100%;height:100%">
+ 
+ <image src="/images/student/bg.png" style="position: absolute;left:0rpx;top:0rpx;width:100%" mode="widthFix"></image>
+ <view style="display: flex; flex-direction: column; flex-wrap: wrap; justify-content: flex-start; width: 100%; align-items: center; margin-top: 20%; height: 100%">
+   <view style="height:237rpx;width:90%;">
+     <image style="width:100%;height:100%"  src="/images/student/white-bg.png" mode="widthFix"></image>
+     <view  style="position: relative; width: 90%; top:-100%; left:5%;height: 237rpx">
+       <view  style="height:220rpx;width:100%;display:flex; flex-direction:row;flex-wrap:nowrap;align-items:center">
+         <image src="/images/student/head.png" mode="heightFix" style="height:80%"></image>
+         <view style="display: flex;flex-direction:column;flex-wrap:wrap;align-items: left;justify-content:space-around; margin-left:8%;height:100%;width:70%">
+           <text style="font-size:30rpx;font-weight:bold">{{info.name}}</text>
+           <view>
+             <image src="/images/0-10.png" mode="widthFix" style="width:40%"></image>
+             <text style="font-size: 28rpx; color: #6b7579; position:absolute;left:50%;top:62%">Lv1</text>
+           </view>
+         </view>
+          
+       </view>
+     </view>
+   </view>
+ 
+   
+  
+  
+   <block wx:if="{{achiveList.length == 0}}">
+     <image src="/images/noData-bg.png" mode="widthFix" style="width: 90%;margin-top: 10%;">
+     <text style="color:rgb(29, 3, 3); font-size: 46rpx; text-align: center; width: 100%; height: 50rpx; position: absolute; top: 10rpx;font-weight: 900;">成就系统</text>
+   </image>
+   </block>
+   <block wx:else style="height: 600rpx;width: 90%;">
+   <view style="height: 60%;width: 100%;">
+    <scroll-view scroll-x class="bg-white nav" style="margin-top: 10%;">
+      <view class="flex text-center">
+        <view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{2}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+          {{index==0?'单板':'双板'}}
+        </view>
+      </view>
+    </scroll-view>
+     <scroll-view scroll-y="true" style="height: 70%;width: 100%">
+       <view wx:for="{{achiveList[TabCur]}}" wx:key="index" >
+         <view style="background-color:{{false?'#ffffc6':'#e9e7e4'}};width: 100%;margin-top:25rpx;border-radius: 20rpx;display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; align-items: center; ">
+           <view style="margin-top: 15rpx;">
+             <text style="font-weight: 900;">{{item.title}}</text>
+           </view>
+           <view bindtap="ShowDetails" data-index="{{index}}" data-target="Modal" style="margin-top: 20rpx; width: 80%; margin-bottom: 20rpx; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center">
+             <view wx:for="{{item.standard}}" wx:for-item="standard" wx:for-index="id" style="margin-right: 30rpx;">
+               <text data-index="{{id}}" style="font-size:30rpx;color:{{info.achives[TabCur][item.uid] && info.achives[TabCur][item.uid][id] ?'#0040b0':'#000000'}};">{{standard.des}}</text>
+             </view>
+             
+           </view>
+           <!-- <block wx:if="{{item.state}}">
+             <image src="/images/finish.png" style="height: 100rpx;position: absolute;opacity: 0.5;right: 10rpx;" mode="heightFix"></image>
+           </block> -->
+         </view>
+       </view>
+     </scroll-view>
+   </view>
+    
+   </block>
+   <view class="cu-modal {{modalName=='Modal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">{{achiveList[TabCur][selectIndex].title}}</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding-xl">
+        <checkbox-group bindchange="checkboxChange">
+        <view wx:for="{{achiveList[TabCur][selectIndex].standard}}" wx:key="index" style="width: 90%;display: flex;  flex-wrap: wrap; justify-content: space-between;margin-top: 10rpx;">
+          <text style="font-size:30rpx;color:{{item.done ?'#0040b0':'#000000'}}; left: 10rpx;text-align: left;">{{item.des}}</text>
+          <checkbox aria-checked="{{item.done}}" style="left: 20rpx;" value="{{index + 1}}"></checkbox>
+        </view>
+        </checkbox-group>
+      </view>
+    </view>
+  </view>
+   <view style="bottom:3%; height: 200rpx;width: 100%;">
+    <button  bindtap="commitData" style="background:#245aaf;border-radius: 50rpx;color:#ffffff">确认修改</button>
+   </view>
+ </view>
+</view>
+

@@ -1,6 +1,8 @@
 {
   "pages": [
+    
     "pages/login/index",
+    "pages/register/index",
     "pages/classRep/index",
     "pages/allClasses/index",
     "pages/achievement/index",
@@ -8,7 +10,10 @@
     "pages/signUp/index",
     "pages/addStudent/index",
     "pages/active/index",
-    "pages/student/index"
+    "pages/student/index",
+    "pages/studentInfo_t/index", 
+    "pages/allStudentsInClass_t/index",
+    "pages/allClasses_t/index"
     
   ],
   "window": {

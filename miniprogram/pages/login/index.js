@@ -68,11 +68,40 @@ Page({
   },
 
   jumpToPlaza(){
+    var user = getApp().globalData.user
+    var that = this
+    if (user.special) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择进入模式',
+        cancelText:'普通用户',
+        confirmText:'管理员',
+        success (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            wx.redirectTo({
       
-       wx.redirectTo({
+              url: `/pages/allClasses_t/index?envId=${that.data.envId}`,
+              // url: `/pages/register/index?envId=${that.data.envId}`,
+
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+            wx.redirectTo({
+     
+              url: `/pages/plaza/index?envId=${that.data.envId}`,
+            })
+          }
+        }
+      })
+      
+    }else{
+      wx.redirectTo({
      
         url: `/pages/plaza/index?envId=${this.data.envId}`,
       })
+    }
+       
   },
 
   getOpenId() {
@@ -90,13 +119,15 @@ Page({
     }).then((resp) => {
    
       var user = getApp().globalData.user
+      // resp.result.userInfo.curStudentId = '10000017'
+      // resp.result.userInfo.phoneNumber = ''
       user.setData(resp.result.userInfo)
   
      wx.hideLoading()
      this.jumpToPlaza()
    }).catch((e) => {
       this.setData({
-        // showUploadTip: true
+     
       })
      wx.hideLoading()
     })

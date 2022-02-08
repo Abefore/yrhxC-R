@@ -28,8 +28,15 @@
       </image>
       </BLock>
       <BLOck wx:else style="height: 600rpx;width: 90%;">
+        <scroll-view scroll-x class="bg-white nav" style="margin-top: 10%;">
+          <view class="flex text-center">
+            <view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{2}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+              {{index==0?'单板':'双板'}}
+            </view>
+          </view>
+        </scroll-view>
         <scroll-view scroll-y="true" style="height: 800rpx;width: 100%;margin-top: 10%;">
-          <view wx:for="{{achiveList}}" wx:key="index" >
+          <view wx:for="{{achiveList[TabCur]}}" wx:key="index" >
             <view style="background-color:{{item.state?'#ffffc6':'#e9e7e4'}};width: 100%;margin-top:25rpx;border-radius: 20rpx;display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; align-items: center; ">
               <view style="margin-top: 15rpx;">
                 <text style="font-weight: 900;">{{item.title}}</text>
