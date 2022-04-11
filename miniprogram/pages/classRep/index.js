@@ -8,7 +8,7 @@ Page({
     imgIndex:0,
     imageFileID:[],
     picPath:getApp().globalData.filePath + "students/",
-    videoPath:'cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/default/class1.mp4',
+    videoPath:'cloud://dev-cloud-1gd6721e8e5c39e6.6465-dev-cloud-1gd6721e8e5c39e6-1307734597/default/class1.mp4',
   },
 
   /**
@@ -22,11 +22,11 @@ Page({
     var imageFileID = []
     for (let index = 0; index < studentInfo.picList.length; index++) {
       const element = studentInfo.picList[index];
-      imageFileID[index] = this.data.picPath +studentInfo._id +'/' +element
+      imageFileID[index] = this.data.picPath +studentInfo.uid +'/' +element
     }
     this.setData({
       imageFileID:imageFileID,
-      videoPath:this.data.picPath +studentInfo._id +'/'+ 'col.mp4'
+      videoPath:this.data.picPath +studentInfo.uid +'/'+ 'col.mp4'
     })
   },
 

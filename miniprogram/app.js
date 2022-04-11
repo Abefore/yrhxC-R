@@ -45,7 +45,7 @@ App({
         },
         
       },
-      filePath:'cloud://cloud1-8gah9v4cd85e78f5.636c-cloud1-8gah9v4cd85e78f5-1307734597/',
+      filePath:'cloud://dev-cloud-1gd6721e8e5c39e6.6465-dev-cloud-1gd6721e8e5c39e6-1307734597/',
     }
     // this.globalData.user.setData({_id:'22'})
     // console.log(12312)

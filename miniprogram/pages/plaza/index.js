@@ -174,7 +174,7 @@ Page({
         },
         data: {
           type: 'searchStudent',
-          phoneNumber:user.phoneNumber,
+          phoneNumber:user.phoneNumber, //test可以修改这里的
           curStudentId:user.curStudentId
         }
       }).then((resp) => {

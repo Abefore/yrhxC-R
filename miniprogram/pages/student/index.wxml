@@ -37,13 +37,16 @@
         </scroll-view>
         <scroll-view scroll-y="true" style="height: 800rpx;width: 100%;margin-top: 10%;">
           <view wx:for="{{achiveList[TabCur]}}" wx:key="index" >
-            <view style="background-color:{{item.state?'#ffffc6':'#e9e7e4'}};width: 100%;margin-top:25rpx;border-radius: 20rpx;display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; align-items: center; ">
+            <!-- <view style="background-color:{{item.state?'#ffffc6':'#e9e7e4'}};width: 100%;margin-top:25rpx;border-radius: 20rpx;display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; align-items: center; "> -->
+            <view style="background:{{item.state?'linear-gradient(120deg, #f6d365 0%, #fda085 100%)':'#e9e7e4'}};width: 100%;margin-top:25rpx;border-radius: 20rpx;display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; align-items: center; ">
+             
               <view style="margin-top: 15rpx;">
-                <text style="font-weight: 900;">{{item.title}}</text>
+                <text style="font-weight: 900;font-weight:bolder">{{item.title}}</text>
               </view>
               <view style="margin-top: 20rpx; width: 80%; margin-bottom: 20rpx; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center">
                 <view wx:for="{{item.standard}}" wx:key="index" style="margin-right: 30rpx;">
-                  <text style="font-size:30rpx;color:{{item.done ?'#0040b0':'#000000'}};">{{item.des}}</text>
+                  <!-- <text style="font-size:30rpx;color:{{item.done ?'#0040b0':'#000000'}};">{{item.des}}</text> //font-weight:bold -->
+                  <text style="font-size:25rpx;font-weight:{{item.done ?'bold':'normal'}};">{{item.des}}</text> 
                 </view>
                 
               </view>
